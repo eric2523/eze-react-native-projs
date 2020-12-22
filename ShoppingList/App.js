@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {Header} from './components/header.js';
 import {ListItem} from "./components/list-item"
+import {AddItem} from "./components/add-item"
 
 const App = () => {
   const [items, setItems] = useState([
@@ -17,6 +18,12 @@ const App = () => {
     })
   }
 
+  const addItem = (text) => {
+    setItems(prevItems => {
+      return [{id:`${Math.random() * 100}`, text},...prevItems]
+    })
+  }
+
   return (
     <View style={styles.container}>
       <Header />
@@ -24,6 +31,7 @@ const App = () => {
         data={items}
         renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem}/>}
       />
+      <AddItem addItem={addItem}/>
     </View>
   );
 };
